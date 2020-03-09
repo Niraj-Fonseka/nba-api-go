@@ -33,6 +33,6 @@ func (n *NBAapi) GetLeagues() (leagues.Leagues, error) {
 	return leagues.GetLeagues(n.Requests)
 }
 
-func (n *NBAapi) GetTeams(league string) (teams.Teams, error) {
+func (n *NBAapi) GetTeamsByLeague(league string) (teams.Teams, error) {
 	return teams.GetTeamsByLeague(n.Requests, league)
 }
