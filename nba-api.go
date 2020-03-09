@@ -1,6 +1,7 @@
 package nba
 
 import (
+	"nba-api-go/leagues"
 	"nba-api-go/requests"
 	"nba-api-go/seasons"
 
@@ -25,4 +26,8 @@ func NewNBAapiClient(url string, host string, key string) *NBAapi {
 
 func (n *NBAapi) GetSeasons() (seasons.Seasons, error) {
 	return seasons.GetSeasons(n.Requests)
+}
+
+func (n *NBAapi) GetLeagues() (leagues.Leagues, error) {
+	return leagues.GetLeagues(n.Requests)
 }
