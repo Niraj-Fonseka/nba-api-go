@@ -4,6 +4,7 @@ import (
 	"nba-api-go/leagues"
 	"nba-api-go/requests"
 	"nba-api-go/seasons"
+	"nba-api-go/teams"
 
 	"net/http"
 )
@@ -30,4 +31,8 @@ func (n *NBAapi) GetSeasons() (seasons.Seasons, error) {
 
 func (n *NBAapi) GetLeagues() (leagues.Leagues, error) {
 	return leagues.GetLeagues(n.Requests)
+}
+
+func (n *NBAapi) GetTeams(league string) (teams.Teams, error) {
+	return teams.GetTeamsByLeague(n.Requests, league)
 }
