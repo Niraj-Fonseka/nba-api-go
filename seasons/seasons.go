@@ -10,7 +10,8 @@ var (
 )
 
 type Seasons struct {
-	API struct {
+	Requests *requests.Requests
+	API      struct {
 		Status  int      `json:"status"`
 		Message string   `json:"message"`
 		Results int      `json:"results"`
@@ -19,7 +20,11 @@ type Seasons struct {
 	} `json:"api"`
 }
 
-func GetSeasons(requests *requests.Requests) (seasons Seasons, err error) {
+func (n *Seasons) GetSeasons() (Seasons, error) {
+	return getSeasons(n.Requests)
+}
+
+func getSeasons(requests *requests.Requests) (seasons Seasons, err error) {
 
 	seasonsResponse, err := requests.NewGetRequest(seasonsURL)
 

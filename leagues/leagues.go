@@ -10,7 +10,8 @@ var (
 )
 
 type Leagues struct {
-	API struct {
+	Requests *requests.Requests
+	API      struct {
 		Status  int      `json:"status"`
 		Message string   `json:"message"`
 		Results int      `json:"results"`
@@ -19,7 +20,11 @@ type Leagues struct {
 	} `json:"api"`
 }
 
-func GetLeagues(requests *requests.Requests) (leagues Leagues, err error) {
+func (n *Leagues) GetLeagues() (Leagues, error) {
+	return getLeagues(n.Requests)
+}
+
+func getLeagues(requests *requests.Requests) (leagues Leagues, err error) {
 
 	leaguesResponse, err := requests.NewGetRequest(leaguesURL)
 

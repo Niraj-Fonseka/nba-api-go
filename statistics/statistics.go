@@ -6,7 +6,8 @@ import (
 )
 
 type Statistics struct {
-	API struct {
+	Requests *requests.Requests
+	API      struct {
 		Status     int         `json:"status"`
 		Message    string      `json:"message"`
 		Results    int         `json:"results"`
@@ -50,7 +51,19 @@ var (
 	statisticsURL = "/statistics/"
 )
 
-func GetStastics(requests *requests.Requests, filter string, filterValue string) (stats Statistics, err error) {
+func (n *Statistics) GetGameStatisticsByGameID(gameID string) (Statistics, error) {
+	return getStastics(n.Requests, "games/gameId/", gameID)
+}
+
+func (n *Statistics) GetPlayerStatisticsByGameID(gameID string) (Statistics, error) {
+	return getStastics(n.Requests, "players/gameId/", gameID)
+}
+
+func (n *Statistics) GetPlayerStatisticsPlayerID(playerID string) (Statistics, error) {
+	return getStastics(n.Requests, "players/playerId/", playerID)
+}
+
+func getStastics(requests *requests.Requests, filter string, filterValue string) (stats Statistics, err error) {
 
 	teamsResponse, err := requests.NewGetRequest(statisticsURL + filter + filterValue)
 

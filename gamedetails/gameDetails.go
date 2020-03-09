@@ -7,7 +7,8 @@ import (
 )
 
 type GameDetails struct {
-	API struct {
+	Requests *requests.Requests
+	API      struct {
 		Status  int      `json:"status"`
 		Message string   `json:"message"`
 		Results int      `json:"results"`
@@ -73,7 +74,11 @@ var (
 	gameDetailsURL = "/gameDetails/"
 )
 
-func GetGameDetails(requests *requests.Requests, gameID string) (gamedetails GameDetails, err error) {
+func (n *GameDetails) GetGameDetailsByID(gameID string) (GameDetails, error) {
+	return getGameDetails(n.Requests, gameID)
+}
+
+func getGameDetails(requests *requests.Requests, gameID string) (gamedetails GameDetails, err error) {
 
 	gameDetailsResponse, err := requests.NewGetRequest(gameDetailsURL + gameID)
 
