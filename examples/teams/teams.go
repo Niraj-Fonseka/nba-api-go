@@ -19,7 +19,7 @@ func main() {
 func GetTeamsTeamID() {
 	client := api.NewNBAapiClient(os.Getenv("BASEURL"), os.Getenv("HOST"), os.Getenv("KEY"))
 
-	seasons, err := client.GetTeamsByTeamID("1")
+	seasons, err := client.Teams().GetTeamsByTeamID("1")
 
 	if err != nil {
 		panic(err)
@@ -31,7 +31,7 @@ func GetTeamsTeamID() {
 func GetTeamsByLeague() {
 	client := api.NewNBAapiClient(os.Getenv("BASEURL"), os.Getenv("HOST"), os.Getenv("KEY"))
 
-	seasons, err := client.GetTeamsByLeague("standard")
+	seasons, err := client.Teams().GetTeamsByLeague("standard")
 
 	if err != nil {
 		panic(err)
@@ -43,7 +43,7 @@ func GetTeamsByLeague() {
 func GetTeamsByCity() {
 	client := api.NewNBAapiClient(os.Getenv("BASEURL"), os.Getenv("HOST"), os.Getenv("KEY"))
 
-	seasons, err := client.GetTeamsByCity("Atlanta")
+	seasons, err := client.Teams().GetTeamsByCity("Atlanta")
 
 	if err != nil {
 		panic(err)
@@ -55,7 +55,7 @@ func GetTeamsByCity() {
 func GetTeamsByShortName() {
 	client := api.NewNBAapiClient(os.Getenv("BASEURL"), os.Getenv("HOST"), os.Getenv("KEY"))
 
-	seasons, err := client.GetTeamsByShortName("ATL")
+	seasons, err := client.Teams().GetTeamsByShortName("ATL")
 
 	if err != nil {
 		panic(err)
@@ -67,7 +67,7 @@ func GetTeamsByShortName() {
 func GetTeamsByNickName() {
 	client := api.NewNBAapiClient(os.Getenv("BASEURL"), os.Getenv("HOST"), os.Getenv("KEY"))
 
-	seasons, err := client.GetTeamsByNickName("Hawks")
+	seasons, err := client.Teams().GetTeamsByNickName("Hornets")
 
 	if err != nil {
 		panic(err)
@@ -79,7 +79,7 @@ func GetTeamsByNickName() {
 func GetTeamsByConfName() {
 	client := api.NewNBAapiClient(os.Getenv("BASEURL"), os.Getenv("HOST"), os.Getenv("KEY"))
 
-	seasons, err := client.GetTeamsByConfName("East")
+	seasons, err := client.Teams().GetTeamsByConfName("East")
 
 	if err != nil {
 		panic(err)
@@ -91,7 +91,7 @@ func GetTeamsByConfName() {
 func GetTeamsByDivName() {
 	client := api.NewNBAapiClient(os.Getenv("BASEURL"), os.Getenv("HOST"), os.Getenv("KEY"))
 
-	seasons, err := client.GetTeamsByDivName("Southeast")
+	seasons, err := client.Teams().GetTeamsByDivName("Southeast")
 
 	if err != nil {
 		panic(err)

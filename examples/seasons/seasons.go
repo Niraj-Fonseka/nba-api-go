@@ -9,7 +9,7 @@ import (
 func main() {
 	client := api.NewNBAapiClient(os.Getenv("BASEURL"), os.Getenv("HOST"), os.Getenv("KEY"))
 
-	seasons, err := client.GetSeasons()
+	seasons, err := client.Seasons().GetSeasons()
 
 	if err != nil {
 		panic(err)

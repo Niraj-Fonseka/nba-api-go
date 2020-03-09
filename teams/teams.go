@@ -10,7 +10,8 @@ var (
 )
 
 type Teams struct {
-	API struct {
+	Requests *requests.Requests
+	API      struct {
 		Status  int      `json:"status"`
 		Message string   `json:"message"`
 		Results int      `json:"results"`
@@ -36,7 +37,35 @@ type Team struct {
 	} `json:"leagues"`
 }
 
-func GetTeams(requests *requests.Requests, filter string, filterValue string) (teams Teams, err error) {
+func (n *Teams) GetTeamsByTeamID(teamId string) (Teams, error) {
+	return getTeams(n.Requests, "teamId/", teamId)
+}
+
+func (n *Teams) GetTeamsByLeague(league string) (Teams, error) {
+	return getTeams(n.Requests, "league/", league)
+}
+
+func (n *Teams) GetTeamsByCity(city string) (Teams, error) {
+	return getTeams(n.Requests, "city/", city)
+}
+
+func (n *Teams) GetTeamsByShortName(shortName string) (Teams, error) {
+	return getTeams(n.Requests, "shortName/", shortName)
+}
+
+func (n *Teams) GetTeamsByNickName(nickName string) (Teams, error) {
+	return getTeams(n.Requests, "nickName/", nickName)
+}
+
+func (n *Teams) GetTeamsByConfName(confName string) (Teams, error) {
+	return getTeams(n.Requests, "confName/", confName)
+}
+
+func (n *Teams) GetTeamsByDivName(divName string) (Teams, error) {
+	return getTeams(n.Requests, "divName/", divName)
+}
+
+func getTeams(requests *requests.Requests, filter string, filterValue string) (teams Teams, err error) {
 
 	teamsResponse, err := requests.NewGetRequest(teamsURL + filter + filterValue)
 

@@ -9,6 +9,7 @@ import (
 	"nba-api-go/seasons"
 	"nba-api-go/standings"
 	"nba-api-go/statistics"
+	"nba-api-go/teams"
 
 	"net/http"
 )
@@ -26,6 +27,12 @@ func NewNBAapiClient(url string, host string, key string) *NBAapi {
 			Key:     key,
 			Client:  &http.Client{},
 		},
+	}
+}
+
+func (n *NBAapi) Teams() *teams.Teams {
+	return &teams.Teams{
+		Requests: n.Requests,
 	}
 }
 
