@@ -1,13 +1,28 @@
 package nba
 
+import (
+	"nba-api-go/requests"
+	"nba-api-go/seasons"
+
+	"net/http"
+)
+
 type NBAapi struct {
+	Requests *requests.Requests
 }
 
-func NewNBAapiClient() *NBAapi {
+func NewNBAapiClient(url string, host string, key string) *NBAapi {
 
-	return nil
+	return &NBAapi{
+		Requests: &requests.Requests{
+			BaseURL: url,
+			Host:    host,
+			Key:     key,
+			Client:  &http.Client{},
+		},
+	}
 }
 
-func (n *NBAapi) GetSeasons() {
-
+func (n *NBAapi) GetSeasons() (seasons.Seasons, error) {
+	return seasons.GetSeasons(n.Requests)
 }
