@@ -36,14 +36,15 @@ type Team struct {
 	} `json:"leagues"`
 }
 
-func GetTeamsByLeague(requests *requests.Requests, league string) (teams Teams, err error) {
-	teamResponse, err := requests.NewGetRequest(teamsURL + "league/" + league)
+func GetTeams(requests *requests.Requests, filter string, filterValue string) (teams Teams, err error) {
+
+	teamsResponse, err := requests.NewGetRequest(teamsURL + filter + filterValue)
 
 	if err != nil {
 		return teams, err
 	}
 
-	err = json.Unmarshal(teamResponse, &teams)
+	err = json.Unmarshal(teamsResponse, &teams)
 
 	if err != nil {
 		return teams, err
