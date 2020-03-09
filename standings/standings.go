@@ -6,7 +6,8 @@ import (
 )
 
 type Standings struct {
-	API struct {
+	Requests *requests.Requests
+	API      struct {
 		Status    int        `json:"status"`
 		Message   string     `json:"message"`
 		Results   int        `json:"results"`
@@ -59,7 +60,23 @@ var (
 	standingsURL = "/standings/"
 )
 
-func GetStandings(requests *requests.Requests, league string, year string, filter string, filterValue string) (standings Standings, err error) {
+func (n *Standings) GetStandingsByConference(league string, seasonYear string, conference string) (Standings, error) {
+	return getStandings(n.Requests, league, seasonYear, "conference/", conference)
+}
+
+func (n *Standings) GetStandingsByDivision(league string, seasonYear string, division string) (Standings, error) {
+	return getStandings(n.Requests, league, seasonYear, "division/", division)
+}
+
+func (n *Standings) GetStandingsByTeamID(league string, seasonYear string, teamID string) (Standings, error) {
+	return getStandings(n.Requests, league, seasonYear, "teamId/", teamID)
+}
+
+func (n *Standings) GetStandings(league string, seasonYear string) (Standings, error) {
+	return getStandings(n.Requests, league, seasonYear, "", "")
+}
+
+func getStandings(requests *requests.Requests, league string, year string, filter string, filterValue string) (standings Standings, err error) {
 
 	teamsResponse, err := requests.NewGetRequest(standingsURL + league + "/" + year + "/" + filter + filterValue)
 
